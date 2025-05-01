@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">equipoCatorce</string>
+    <string name="title_nueva_cita">Nueva Cita</string>
+    <string name="back">Atrás</string>
+    <string name="hint_nombre_mascota">Nombre de la Mascota</string>
+    <string name="hint_raza">Raza</string>
+    <string name="hint_nombre_propietario">Nombre del Propietario</string>
+    <string name="hint_telefono">Teléfono</string>
+    <string name="guardar_cita">Guardar Cita</string>
 </resources>
