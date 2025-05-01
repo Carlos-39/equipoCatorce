@@ -47,7 +47,7 @@
         android:layout_marginTop="16dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etNombreMascota"
+            android:id="@+id/editTextNombreMascota"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLength="15"
@@ -71,7 +71,7 @@
         android:layout_marginTop="16dp">
 
         <AutoCompleteTextView
-            android:id="@+id/autoCompleteRaza"
+            android:id="@+id/inputRaza"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text" />
@@ -94,7 +94,7 @@
         android:layout_marginTop="16dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etNombrePropietario"
+            android:id="@+id/editTextNombrePropietario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLength="30"
@@ -118,7 +118,7 @@
         android:layout_marginTop="16dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etTelefono"
+            android:id="@+id/editTextTelefono"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLength="10"
@@ -146,8 +146,8 @@
         android:textColor="@android:color/white"
         android:textStyle="bold"
         android:icon="@android:drawable/ic_menu_save"
-        android:iconPadding="8dp"
         android:iconTint="@android:color/white"
+        app:iconPadding="8dp"
         android:backgroundTint="#F05861"
         app:cornerRadius="16dp"
         app:layout_constraintTop_toBottomOf="@id/spinnerSintomas"
@@ -155,5 +155,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="16dp"
         android:enabled="false"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

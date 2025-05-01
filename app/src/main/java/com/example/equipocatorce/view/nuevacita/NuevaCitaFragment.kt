@@ -1,70 +1,65 @@
-package com.example.equipocatorce.view
+package com.example.equipocatorce.view.nuevacita
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Spinner
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.equipocatorce.R
-import com.google.android.material.button.MaterialButton
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
-import com.google.android.material.textfield.MaterialAutoCompleteTextView
+import com.example.equipocatorce.databinding.FragmentNuevaCitaBinding
+import com.example.equipocatorce.network.RetrofitClient
+import com.example.equipocatorce.network.DogBreedsResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class NuevaCitaFragment : Fragment() {
+class NuevaCitaFragment : Fragment(R.layout.fragment_nueva_cita) {
 
-    private lateinit var etNombreMascota: TextInputEditText
-    private lateinit var autoCompleteRaza: MaterialAutoCompleteTextView
-    private lateinit var etNombrePropietario: TextInputEditText
-    private lateinit var etTelefono: TextInputEditText
-    private lateinit var spinnerSintomas: Spinner
-    private lateinit var btnGuardarCita: MaterialButton
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_nueva_cita, container, false)
-    }
+    private var _binding: FragmentNuevaCitaBinding? = null
+    private val binding get() = _binding!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentNuevaCitaBinding.bind(view)
+        binding.toolbarNuevaCita.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
+        val sintomasList = listOf(
+            "Síntomas",
+            "Solo duerme",
+            "No come",
+            "Fractura extremidad",
+            "Tiene pulgas",
+            "Tiene garrapatas",
+            "Bota demasiado pelo"
+        )
 
-        // Vinculación de vistas
-        etNombreMascota = view.findViewById(R.id.etNombreMascota)
-        autoCompleteRaza = view.findViewById(R.id.autoCompleteRaza)
-        etNombrePropietario = view.findViewById(R.id.etNombrePropietario)
-        etTelefono = view.findViewById(R.id.etTelefono)
-        spinnerSintomas = view.findViewById(R.id.spinnerSintomas)
-        btnGuardarCita = view.findViewById(R.id.btnGuardarCita)
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, sintomasList)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerSintomas.adapter = adapter
 
-        // Llenar AutoComplete Raza
-        val razas = listOf("Labrador", "Poodle", "Golden Retriever", "Bulldog", "Beagle")
-        val razaAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, razas)
-        autoCompleteRaza.setAdapter(razaAdapter)
+        RetrofitClient.dogApiService.getAllBreeds().enqueue(object : Callback<DogBreedsResponse> {
+            override fun onResponse(call: Call<DogBreedsResponse>, response: Response<DogBreedsResponse>) {
+                if (response.isSuccessful) {
+                    val breedsMap = response.body()?.message
+                    val breedList = breedsMap?.keys?.toList()?.sorted() ?: emptyList()
 
-        // Llenar Spinner Síntomas
-        val sintomas = listOf("Dolor abdominal", "Tos", "Fiebre", "Letargo", "Vómito")
-        val sintomasAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, sintomas)
-        sintomasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinnerSintomas.adapter = sintomasAdapter
+                    val breedAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, breedList)
+                    binding.inputRaza.setAdapter(breedAdapter)
+                }
+            }
 
-        // Opcional: Activar botón solo si todo está lleno
-        habilitarBotonSiCamposLlenos()
+            override fun onFailure(call: Call<DogBreedsResponse>, t: Throwable) {
+                Toast.makeText(requireContext(), "Error al cargar las razas", Toast.LENGTH_SHORT).show()
+                        }
+        })
+
+        // Aquí implementaremos toda la lógica más adelante
     }
 
-    private fun habilitarBotonSiCamposLlenos() {
-        val campos = listOf(etNombreMascota, autoCompleteRaza, etNombrePropietario, etTelefono)
-
-        val listener = {
-            val todoLleno = campos.all { it.text?.isNotBlank() == true }
-            btnGuardarCita.isEnabled = todoLleno
-        }
-
-        campos.forEach { campo ->
-            campo.addTextChangedListener { listener() }
-        }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
