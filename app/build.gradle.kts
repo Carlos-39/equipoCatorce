@@ -26,6 +26,9 @@ android {
             )
         }
     }
+    buildFeatures {
+        dataBinding = true
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -43,7 +46,10 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.navigation.fragment)
+    //Lottie para imagenes animadas
+    implementation("com.airbnb.android:lottie:6.6.6")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
 }
