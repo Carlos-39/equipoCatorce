@@ -4,6 +4,7 @@ import android.content.Context
 import com.example.equipocatorce.data.DogAppointmentDao
 import com.example.equipocatorce.data.DogAppointmentsDB
 import com.example.equipocatorce.model.DogAppointment
+import com.example.equipocatorce.model.DogImageResponse
 import com.example.equipocatorce.webservice.ApiService
 import com.example.equipocatorce.webservice.ApiUtils
 import kotlinx.coroutines.Dispatchers
@@ -43,5 +44,29 @@ class DogAppointmentRepository(val context: Context) {
         }
     }
 
-    // API service configuration (TODO)
+    // API service configuration
+
+    suspend fun getBreeds(): Map<String, List<String>> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = apiService.getBreeds()
+                response.message
+            } catch (e: Exception) {
+                e.printStackTrace()
+                emptyMap<String, List<String>>()
+            }
+        }
+    }
+
+    suspend fun getImage(): DogImageResponse {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = apiService.getImage()
+                response
+            } catch (e: Exception) {
+                e.printStackTrace()
+                DogImageResponse(message = "", status = "")
+            }
+        }
+    }
 }
