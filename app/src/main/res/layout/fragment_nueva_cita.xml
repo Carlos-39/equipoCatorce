@@ -1,174 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- Toolbar personalizada -->
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarNuevaCita"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:background="@drawable/toolbar"
-        android:elevation="6dp"
-        android:padding="12dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/toolbarTitle"
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarNuevaCita"
+            android:layout_width="350dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/toolbar"
+            android:elevation="6dp"
+            android:padding="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="start"
+                android:layout_marginStart="50sp"
+                android:clickable="true"
+                android:contentDescription="TODO"
+                android:focusable="true"
+                android:src="@drawable/ic_back_arrow" />
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Nueva Cita"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputLayoutNombreMascota"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/title_nueva_cita"
-            android:textColor="@android:color/white"
-            android:textSize="25sp"
-            android:textStyle="bold"/>
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:hint="@string/hint_nombre_mascota"
+            app:boxStrokeColor="#800080"
+            app:boxStrokeWidthFocused="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbarNuevaCita">
 
-        <ImageButton
-            android:id="@+id/btnBack"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@android:color/transparent"
-            android:src="@android:drawable/ic_menu_revert"
-            android:contentDescription="@string/back"
-            android:layout_gravity="start|center_vertical"
-            app:tint="#F05861"/>
-    </androidx.appcompat.widget.Toolbar>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextNombreMascota"
+                android:layout_width="match_parent"
+                android:layout_height="53dp"
+                android:inputType="textPersonName"
+                android:maxLength="15" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Nombre de la mascota -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputLayoutNombreMascota"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/hint_nombre_mascota"
-        app:boxStrokeColor="#800080"
-        app:boxStrokeWidthFocused="2dp"
-        app:layout_constraintTop_toBottomOf="@id/toolbarNuevaCita"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp">
+        <!-- Raza -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputLayoutRaza"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:hint="@string/hint_raza"
+            app:boxStrokeColor="#800080"
+            app:boxStrokeWidthFocused="2dp"
+            app:boxCollapsedPaddingTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/inputLayoutNombreMascota"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextNombreMascota"
-            android:layout_width="match_parent"
-            android:layout_height="53dp"
-            android:inputType="textPersonName"
-            android:maxLength="15" />
-    </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Raza -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputLayoutRaza"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/hint_raza"
-        app:boxStrokeColor="#800080"
-        app:boxStrokeWidthFocused="2dp"
-        app:boxCollapsedPaddingTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/inputLayoutNombreMascota"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp">
+            <AutoCompleteTextView
+                android:id="@+id/inputRaza"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:inputType="text"
+                android:paddingStart="16dp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <AutoCompleteTextView
-            android:id="@+id/inputRaza"
-            android:layout_width="match_parent"
+
+        <!-- Nombre del propietario -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputLayoutNombrePropietario"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:hint="@string/hint_nombre_propietario"
+            app:boxStrokeColor="#800080"
+            app:boxStrokeWidthFocused="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/inputLayoutRaza">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextNombrePropietario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:maxLength="30" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Teléfono -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputLayoutTelefono"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:hint="@string/hint_telefono"
+            app:boxStrokeColor="#800080"
+            app:boxStrokeWidthFocused="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/inputLayoutNombrePropietario">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextTelefono"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:maxLength="10" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Spinner síntomas -->
+        <Spinner
+            android:id="@+id/spinnerSintomas"
+            android:layout_width="0dp"
             android:layout_height="52dp"
-            android:inputType="text"
-            android:paddingStart="16dp" />
-    </com.google.android.material.textfield.TextInputLayout>
+            app:layout_constraintTop_toBottomOf="@id/inputLayoutTelefono"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            />
 
-
-    <!-- Nombre del propietario -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputLayoutNombrePropietario"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/hint_nombre_propietario"
-        app:boxStrokeColor="#800080"
-        app:boxStrokeWidthFocused="2dp"
-        app:layout_constraintTop_toBottomOf="@id/inputLayoutRaza"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextNombrePropietario"
-            android:layout_width="match_parent"
+        <!-- Botón guardar -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnGuardarCita"
             android:layout_height="wrap_content"
-            android:maxLength="30"
-            android:inputType="textPersonName"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <!-- Teléfono -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputLayoutTelefono"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/hint_telefono"
-        app:boxStrokeColor="#800080"
-        app:boxStrokeWidthFocused="2dp"
-        app:layout_constraintTop_toBottomOf="@id/inputLayoutNombrePropietario"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextTelefono"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLength="10"
-            android:inputType="phone"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <!-- Spinner síntomas -->
-    <Spinner
-        android:id="@+id/spinnerSintomas"
-        android:layout_width="0dp"
-        android:layout_height="53dp"
-        app:layout_constraintTop_toBottomOf="@id/inputLayoutTelefono"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp" />
-
-    <!-- Botón guardar -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnGuardarCita"
-        android:layout_width="0dp"
-        android:layout_height="52dp"
-        android:layout_margin="16dp"
-        android:layout_marginTop="12dp"
-        android:backgroundTint="#F05861"
-        android:enabled="false"
-        app:icon="@android:drawable/ic_menu_save"
-        app:iconTint="@android:color/black"
-        android:text="@string/guardar_cita"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        app:cornerRadius="16dp"
-        app:iconGravity="textStart"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spinnerSintomas" />
+            android:text="@string/guardar_cita"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            app:icon="@android:drawable/ic_menu_save"
+            app:iconTint="@android:color/black"
+            app:iconPadding="8dp"
+            android:backgroundTint="#F05861"
+            android:layout_margin="16dp"
+            app:layout_constraintTop_toBottomOf="@id/spinnerSintomas"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:cornerRadius="16dp"
+            android:enabled="false"
+            android:layout_width="wrap_content"
+            />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
