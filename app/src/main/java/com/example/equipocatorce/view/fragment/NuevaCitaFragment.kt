@@ -1,6 +1,9 @@
 package com.example.equipocatorce.view.fragment
 
+import android.graphics.Typeface
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -22,9 +25,11 @@ class NuevaCitaFragment : Fragment(R.layout.fragment_nueva_cita) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentNuevaCitaBinding.bind(view)
+
         binding.toolbarNuevaCita.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
+
         val sintomasList = listOf(
             "Síntomas",
             "Solo duerme",
@@ -39,12 +44,12 @@ class NuevaCitaFragment : Fragment(R.layout.fragment_nueva_cita) {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerSintomas.adapter = adapter
 
+        // Cargar razas desde API
         RetrofitClient.dogApiService.getAllBreeds().enqueue(object : Callback<DogBreedsResponse> {
             override fun onResponse(call: Call<DogBreedsResponse>, response: Response<DogBreedsResponse>) {
                 if (response.isSuccessful) {
                     val breedsMap = response.body()?.message
                     val breedList = breedsMap?.keys?.toList()?.sorted() ?: emptyList()
-
                     val breedAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, breedList)
                     binding.inputRaza.setAdapter(breedAdapter)
                 }
@@ -52,10 +57,44 @@ class NuevaCitaFragment : Fragment(R.layout.fragment_nueva_cita) {
 
             override fun onFailure(call: Call<DogBreedsResponse>, t: Throwable) {
                 Toast.makeText(requireContext(), "Error al cargar las razas", Toast.LENGTH_SHORT).show()
-                        }
+            }
         })
 
-        // Aquí implementaremos toda la lógica más adelante
+        // Añadir el mismo TextWatcher a todos los campos
+        binding.editTextNombreMascota.addTextChangedListener(textWatcher)
+        binding.inputRaza.addTextChangedListener(textWatcher)
+        binding.editTextNombrePropietario.addTextChangedListener(textWatcher)
+        binding.editTextTelefono.addTextChangedListener(textWatcher)
+
+        validarCampos() // Validación inicial
+    }
+
+    // TextWatcher para todos los campos
+    private val textWatcher = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        override fun afterTextChanged(s: Editable?) {
+            validarCampos()
+        }
+    }
+
+    private fun validarCampos() {
+        val nombreMascota = binding.editTextNombreMascota.text?.isNotEmpty() == true
+        val raza = binding.inputRaza.text?.isNotEmpty() == true
+        val propietario = binding.editTextNombrePropietario.text?.isNotEmpty() == true
+        val telefono = binding.editTextTelefono.text?.isNotEmpty() == true
+
+        val camposValidos = nombreMascota && raza && propietario && telefono
+        binding.btnGuardarCita.isEnabled = camposValidos
+
+        // Estilo del botón según estado
+        binding.btnGuardarCita.setTextColor(
+            resources.getColor(
+                if (camposValidos) android.R.color.white else android.R.color.darker_gray,
+                null
+            )
+        )
+        binding.btnGuardarCita.setTypeface(null, if (camposValidos) Typeface.BOLD else Typeface.NORMAL)
     }
 
     override fun onDestroyView() {
