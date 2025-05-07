@@ -3,18 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeAdministradorFragment">
+    app:startDestination="@id/nuevaCitaFragment">
+
+    <fragment
+        android:id="@+id/detailAppointment"
+        android:name="com.example.equipocatorce.view.fragment.DetailsAppointmentFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details_appointment" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.equipocatorce.view.fragment.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_detailAppointment"
+            app:destination="@id/detailAppointment" />
+    </fragment>
 
     <fragment
         android:id="@+id/nuevaCitaFragment"
-        android:name="com.example.equipocatorce.view.NuevaCitaFragment"
-        android:label="NuevaCitaFragment" />
-        <action
-            android:id="@+id/action_homeAdministradorFragment_to_nuevaCitaFragment"
-            app:destination="@id/nuevaCitaFragment" />
-    <fragment
-        android:id="@+id/homeAdministradorFragment"
-        android:name="com.example.equipocatorce.view.HomeAdministradorFragment"
-        android:label="fragment_home_administrador"
-        tools:layout="@layout/fragment_home_administrador" />
+        android:name="com.example.equipocatorce.view.fragment.NuevaCitaFragment"
+        android:label="NuevaCitaFragment"
+        tools:layout="@layout/fragment_nueva_cita" />
+
 </navigation>

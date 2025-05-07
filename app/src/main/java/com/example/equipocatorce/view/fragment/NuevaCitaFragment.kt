@@ -1,4 +1,4 @@
-package com.example.equipocatorce.view.nuevacita
+package com.example.equipocatorce.view.fragment
 
 import android.os.Bundle
 import android.view.View
