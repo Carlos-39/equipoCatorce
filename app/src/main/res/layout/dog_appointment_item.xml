@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/dateItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@drawable/dog_appointment_item_background"
+        android:elevation="4dp"
+        android:layout_margin="8dp">
+
+        <!-- Imagen circular de la mascota -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/imagePetCard"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            app:cardCornerRadius="250dp"
+            android:layout_gravity="center">
+            <ImageView
+                android:id="@+id/dogImage"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:scaleType="centerCrop"/>
+        </androidx.cardview.widget.CardView>
+
+
+        <!-- Contenedor vertical para el nombre, descripción y turno -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/imagePetCard"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <!-- Nombre de la mascota -->
+            <TextView
+                android:id="@+id/dogName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nombre de la mascota"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Descripción del síntoma -->
+            <TextView
+                android:id="@+id/dogSymptom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Descripción del síntoma"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+        </LinearLayout>
+
+        <!-- Turno de atención -->
+        <TextView
+            android:id="@+id/id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:textColor="#FF0000"
+            android:text="#1"
+            android:textSize="12sp" />
+
+    </RelativeLayout>
+</layout>
