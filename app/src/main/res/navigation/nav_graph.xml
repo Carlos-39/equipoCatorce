@@ -11,6 +11,7 @@
         android:label="fragment_details"
         tools:layout="@layout/fragment_details_appointment" >
     </fragment>
+
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.equipocatorce.view.fragment.HomeFragment"
@@ -21,6 +22,13 @@
             android:id="@+id/action_homeFragment_to_detailAppointment"
             app:destination="@id/detailAppointment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/editAppointmentFragment"
+        android:name="com.example.equipocatorce.view.fragment.EditAppointmentFragment"
+        android:label="EditAppointmentFragment"
+        tools:layout="@layout/fragment_edit_appointment"
+        />
 
 
 </navigation>
