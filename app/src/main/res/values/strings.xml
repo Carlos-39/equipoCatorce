@@ -7,6 +7,10 @@
     <string name="hint_nombre_propietario">Nombre del Propietario</string>
     <string name="hint_telefono">Teléfono</string>
     <string name="guardar_cita">Guardar Cita</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="editar_cita">Editar Cita</string>
+    <string name="nombre_mascota">Nombre</string>
+    <string name="raza">Raza</string>
+    <string name="nombre_propietario">Propietario</string>
+    <string name="telefono">Teléfono</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

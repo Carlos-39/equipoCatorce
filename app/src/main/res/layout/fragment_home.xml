@@ -1,75 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:theme="@style/Theme.Material3.Dark"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#FFFFFF">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/myCardView"
-            android:layout_width="350dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="72dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+        <RelativeLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/home_header_background"
+            android:padding="16dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/text_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Administrador\n de Citas"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:layout_centerVertical="true"
+                android:gravity="center_horizontal"
+                android:textSize="24sp" />
 
+            <ImageView
+                android:id="@+id/image_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_dog_foreground"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="16dp" />
 
-                <ImageView
-                    android:id="@+id/imageTopCard"
-                    android:layout_width="74dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="15dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="12dp"
-                    android:contentDescription="TODO"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/dog_example"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DogApp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/image_logo" />
 
-                <TextView
-                    android:id="@+id/titleText"
-                    android:layout_width="167dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="48dp"
-                    android:text="Pastor aleman"
-                    android:textColor="@android:color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+        </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/subText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="10dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Tiene garrapas"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.588"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/titleText" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/header"
+            tools:listitem="@layout/dog_appointment_item"
+            android:padding="10dp"/>
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#F05861"
+            android:src="@drawable/add_icon" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-
-        </androidx.cardview.widget.CardView>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 </layout>

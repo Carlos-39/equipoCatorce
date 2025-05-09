@@ -88,4 +88,7 @@ dependencies {
 
     //Glide (Consumir imagenes API)
     implementation ("com.github.bumptech.glide:glide:4.12.0")
+
+    // toolbar
+    implementation ("androidx.coordinatorlayout:coordinatorlayout:1.3.0")
 }
