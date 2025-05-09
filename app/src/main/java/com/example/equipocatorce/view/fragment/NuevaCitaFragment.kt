@@ -8,14 +8,12 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.equipocatorce.R
 import com.example.equipocatorce.databinding.FragmentNuevaCitaBinding
-import com.example.equipocatorce.network.RetrofitClient
-import com.example.equipocatorce.network.DogBreedsResponse
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.equipocatorce.webservice.ApiUtils
+import kotlinx.coroutines.launch
 
 class NuevaCitaFragment : Fragment(R.layout.fragment_nueva_cita) {
 
@@ -44,21 +42,18 @@ class NuevaCitaFragment : Fragment(R.layout.fragment_nueva_cita) {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerSintomas.adapter = adapter
 
-        // Cargar razas desde API
-        RetrofitClient.dogApiService.getAllBreeds().enqueue(object : Callback<DogBreedsResponse> {
-            override fun onResponse(call: Call<DogBreedsResponse>, response: Response<DogBreedsResponse>) {
-                if (response.isSuccessful) {
-                    val breedsMap = response.body()?.message
-                    val breedList = breedsMap?.keys?.toList()?.sorted() ?: emptyList()
-                    val breedAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, breedList)
-                    binding.inputRaza.setAdapter(breedAdapter)
-                }
-            }
-
-            override fun onFailure(call: Call<DogBreedsResponse>, t: Throwable) {
+        // Cargar razas usando corrutinas
+        lifecycleScope.launch {
+            try {
+                val response = ApiUtils.getApiService().getBreeds()
+                val breedsMap = response.message
+                val breedList = breedsMap.keys.toList().sorted()
+                val breedAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, breedList)
+                binding.inputRaza.setAdapter(breedAdapter)
+            } catch (e: Exception) {
                 Toast.makeText(requireContext(), "Error al cargar las razas", Toast.LENGTH_SHORT).show()
             }
-        })
+        }
 
         // Añadir el mismo TextWatcher a todos los campos
         binding.editTextNombreMascota.addTextChangedListener(textWatcher)
@@ -67,9 +62,22 @@ class NuevaCitaFragment : Fragment(R.layout.fragment_nueva_cita) {
         binding.editTextTelefono.addTextChangedListener(textWatcher)
 
         validarCampos() // Validación inicial
+
+        // Validar al presionar el botón
+        binding.btnGuardarCita.setOnClickListener {
+            val sintomaSeleccionado = binding.spinnerSintomas.selectedItem.toString()
+            val camposValidos = binding.btnGuardarCita.isEnabled
+
+            if (sintomaSeleccionado == "Síntomas") {
+                Toast.makeText(requireContext(), "Selecciona un síntoma", Toast.LENGTH_SHORT).show()
+            } else if (camposValidos) {
+                // Aquí irá la lógica para guardar la cita cuando se configure la base de datos
+                Toast.makeText(requireContext(), "Cita lista para guardar (simulado)", Toast.LENGTH_SHORT).show()
+
+            }
+        }
     }
 
-    // TextWatcher para todos los campos
     private val textWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
@@ -87,7 +95,6 @@ class NuevaCitaFragment : Fragment(R.layout.fragment_nueva_cita) {
         val camposValidos = nombreMascota && raza && propietario && telefono
         binding.btnGuardarCita.isEnabled = camposValidos
 
-        // Estilo del botón según estado
         binding.btnGuardarCita.setTextColor(
             resources.getColor(
                 if (camposValidos) android.R.color.white else android.R.color.darker_gray,

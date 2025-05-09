@@ -11,7 +11,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarNuevaCita"
             android:layout_width="350dp"
-            android:layout_height="80dp"
+            android:layout_height="100dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/toolbar"
@@ -158,22 +158,22 @@
         <!-- Botón guardar -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnGuardarCita"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="60dp"
+            android:layout_marginTop="56dp"
+            android:backgroundTint="#F05861"
+            android:enabled="false"
             android:text="@string/guardar_cita"
             android:textColor="@android:color/white"
             android:textStyle="bold"
+            app:cornerRadius="16dp"
             app:icon="@android:drawable/ic_menu_save"
-            app:iconTint="@android:color/black"
             app:iconPadding="8dp"
-            android:backgroundTint="#F05861"
-            android:layout_margin="16dp"
-            app:layout_constraintTop_toBottomOf="@id/spinnerSintomas"
+            app:iconTint="@android:color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:cornerRadius="16dp"
-            android:enabled="false"
-            android:layout_width="wrap_content"
-            />
+            app:layout_constraintTop_toBottomOf="@id/spinnerSintomas" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
