@@ -30,10 +30,10 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
         }
 
         val promptInfo = PromptInfo.Builder()
-            .setTitle("Biometric Authentication")
-            .setDescription("Place your finger on the sensor")
+            .setTitle("Autenticación con Biometría")
+            .setDescription("Ingrese su huella digital")
             .setAllowedAuthenticators(BIOMETRIC_STRONG)
-            .setNegativeButtonText("Cancel")
+            .setNegativeButtonText("Cancelar")
             .build()
 
         val executor = ContextCompat.getMainExecutor(context)
