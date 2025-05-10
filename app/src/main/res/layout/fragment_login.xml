@@ -51,7 +51,7 @@
             />
 
         <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/lottieDog"
+            android:id="@+id/lavfinger"
             android:layout_width="200dp"
             android:layout_height="200dp"
             app:lottie_rawRes="@raw/fingerprint"

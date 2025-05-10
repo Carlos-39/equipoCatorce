@@ -48,8 +48,19 @@ dependencies {
     implementation(libs.androidx.navigation.fragment)
     //Lottie para imagenes animadas
     implementation("com.airbnb.android:lottie:6.6.6")
+    // Biometría (huella digital, facial, etc.)
+    implementation("androidx.biometric:biometric:1.1.0")
+    implementation(libs.androidx.lifecycle.viewmodel.android)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    //viewmodel
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+    implementation ("androidx.activity:activity-ktx:1.8.0")
+    implementation ("androidx.fragment:fragment-ktx:1.6.2")
+
+    // LiveData
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
 
 }
