@@ -34,7 +34,7 @@ class HomeFragment : Fragment() {
 
     private fun controllers() {
         binding.addButton.setOnClickListener{
-            findNavController().navigate(R.id.action_homeFragment_to_detailAppointment)
+            findNavController().navigate(R.id.action_homeFragment_to_nuevaCitaFragment)
         }
     }
 

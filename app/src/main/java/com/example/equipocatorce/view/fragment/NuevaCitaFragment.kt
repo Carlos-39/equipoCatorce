@@ -15,6 +15,7 @@ import com.example.equipocatorce.databinding.FragmentNuevaCitaBinding
 import com.example.equipocatorce.webservice.ApiUtils
 import kotlinx.coroutines.launch
 
+
 class NuevaCitaFragment : Fragment(R.layout.fragment_nueva_cita) {
 
     private var _binding: FragmentNuevaCitaBinding? = null
@@ -27,6 +28,8 @@ class NuevaCitaFragment : Fragment(R.layout.fragment_nueva_cita) {
         binding.toolbarNuevaCita.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
+
+        controllers()
 
         val sintomasList = listOf(
             "Síntomas",
@@ -75,6 +78,12 @@ class NuevaCitaFragment : Fragment(R.layout.fragment_nueva_cita) {
                 Toast.makeText(requireContext(), "Cita lista para guardar (simulado)", Toast.LENGTH_SHORT).show()
 
             }
+        }
+    }
+
+    private fun controllers() {
+        binding.addButton.setOnClickListener{
+            findNavController().navigate(R.id.action_nuevaCitaFragment_to_homeFragment)
         }
     }
 
