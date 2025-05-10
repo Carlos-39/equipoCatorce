@@ -27,8 +27,12 @@
         android:id="@+id/editAppointmentFragment"
         android:name="com.example.equipocatorce.view.fragment.EditAppointmentFragment"
         android:label="EditAppointmentFragment"
-        tools:layout="@layout/fragment_edit_appointment"
-        />
+        tools:layout="@layout/fragment_edit_appointment">
+
+        <action
+            android:id="@+id/action_editAppointmentFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/nuevaCitaFragment"
