@@ -1,11 +1,16 @@
 <resources>
     <string name="app_name">equipoCatorce</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="title_nueva_cita">Nueva Cita</string>
+    <string name="back">Atrás</string>
+    <string name="hint_nombre_mascota">Nombre de la Mascota</string>
+    <string name="hint_raza">Raza</string>
+    <string name="hint_nombre_propietario">Nombre del Propietario</string>
+    <string name="hint_telefono">Teléfono</string>
+    <string name="guardar_cita">Guardar Cita</string>
     <string name="editar_cita">Editar Cita</string>
-    <string name="nombre_mascota">Nombre de la Mascota</string>
+    <string name="nombre_mascota">Nombre</string>
     <string name="raza">Raza</string>
-    <string name="nombre_propietario">Nombre del Propietario</string>
+    <string name="nombre_propietario">Propietario</string>
     <string name="telefono">Teléfono</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
