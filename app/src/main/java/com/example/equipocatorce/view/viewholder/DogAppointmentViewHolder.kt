@@ -22,7 +22,7 @@ class DogAppointmentViewHolder(binding: DogAppointmentItemBinding, navController
         bindingItem.dateItem.setOnClickListener {
             val bundle = Bundle()
             bundle.putSerializable("dogAppointment", dogAppointment)
-            navController.navigate(R.id.action_homeFragment_to_detailAppointment, bundle)
+            navController.navigate(R.id.action_homeFragment_to_nuevaCitaFragment, bundle)
         }
     }
 }

@@ -19,8 +19,8 @@
         tools:layout="@layout/fragment_home"
         >
         <action
-            android:id="@+id/action_homeFragment_to_detailAppointment"
-            app:destination="@id/detailAppointment" />
+            android:id="@+id/action_homeFragment_to_nuevaCitaFragment"
+            app:destination="@id/nuevaCitaFragment" />
     </fragment>
 
     <fragment
@@ -34,7 +34,11 @@
         android:id="@+id/nuevaCitaFragment"
         android:name="com.example.equipocatorce.view.fragment.NuevaCitaFragment"
         android:label="NuevaCitaFragment"
-        tools:layout="@layout/fragment_nueva_cita"/>
+        tools:layout="@layout/fragment_nueva_cita">
+        <action
+            android:id="@+id/action_nuevaCitaFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 
 
 </navigation>

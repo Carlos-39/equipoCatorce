@@ -14,6 +14,8 @@ import com.example.equipocatorce.R
 import com.example.equipocatorce.databinding.FragmentNuevaCitaBinding
 import com.example.equipocatorce.webservice.ApiUtils
 import kotlinx.coroutines.launch
+import com.example.equipocatorce.data.DogAppointmentsDB
+import com.example.equipocatorce.model.DogAppointment
 
 class NuevaCitaFragment : Fragment(R.layout.fragment_nueva_cita) {
 
@@ -27,6 +29,8 @@ class NuevaCitaFragment : Fragment(R.layout.fragment_nueva_cita) {
         binding.toolbarNuevaCita.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
+
+        controllers()
 
         val sintomasList = listOf(
             "Síntomas",
@@ -71,10 +75,36 @@ class NuevaCitaFragment : Fragment(R.layout.fragment_nueva_cita) {
             if (sintomaSeleccionado == "Síntomas") {
                 Toast.makeText(requireContext(), "Selecciona un síntoma", Toast.LENGTH_SHORT).show()
             } else if (camposValidos) {
-                // Aquí irá la lógica para guardar la cita cuando se configure la base de datos
-                Toast.makeText(requireContext(), "Cita lista para guardar (simulado)", Toast.LENGTH_SHORT).show()
+                val raza = binding.inputRaza.text.toString().lowercase().trim().replace(" ", "/")
 
+                lifecycleScope.launch {
+                    try {
+                        val imageResponse = ApiUtils.getApiService().getImage(raza)
+                        val imageUrl = imageResponse.message
+
+                        val cita = DogAppointment(
+                            dogName = binding.editTextNombreMascota.text.toString(),
+                            dogBreed = binding.inputRaza.text.toString(),
+                            ownerName = binding.editTextNombrePropietario.text.toString(),
+                            phone = binding.editTextTelefono.text.toString(),
+                            dogSymptom = sintomaSeleccionado,
+                            dogImage = imageUrl
+                        )
+
+                        val db = DogAppointmentsDB.getDatabase(requireContext())
+                        db.dogAppointmentsDao().saveAppointment(cita)
+                        findNavController().navigate(R.id.action_nuevaCitaFragment_to_homeFragment)
+                    } catch (e: Exception) {
+                        Toast.makeText(requireContext(), "Error al obtener la imagen de la raza", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
+        }
+    }
+
+    private fun controllers() {
+        binding.addButton.setOnClickListener {
+            findNavController().navigate(R.id.action_nuevaCitaFragment_to_homeFragment)
         }
     }
 
