@@ -9,9 +9,13 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.example.equipocatorce.R
 import com.example.equipocatorce.databinding.FragmentEditAppointmentBinding
 import com.example.equipocatorce.model.DogAppointment
 import com.example.equipocatorce.viewmodel.DogAppointmentViewModel
+import kotlinx.coroutines.launch
 
 class EditAppointmentFragment : Fragment() {
     private lateinit var binding: FragmentEditAppointmentBinding
@@ -29,9 +33,11 @@ class EditAppointmentFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        getData()
-//        observers()
-//        controladores()
+        getData()
+        observers()
+        controladores()
+        setupEditButton()
+        setupToolbar()
     }
 
     private fun getData() {
@@ -43,7 +49,8 @@ class EditAppointmentFragment : Fragment() {
         binding.tiTelefono.editText?.setText(receivedAppointment.phone)
         binding.tiRaza.editText?.setText(receivedAppointment.dogBreed)
 
-        dogAppointmentViewModel.getImage(receivedAppointment.dogBreed)
+        binding.btnEditarCita.isEnabled = false
+
         dogAppointmentViewModel.getBreeds()
     }
 
@@ -67,10 +74,13 @@ class EditAppointmentFragment : Fragment() {
         }
     }
 
+    private fun setupToolbar() {
+        binding.includeToolbar.ivBack.setOnClickListener() {
+            findNavController().navigateUp()
+        }
+    }
+
     private fun controladores() {
-        // Botón de Atras TODO
-
-
         // TextWatcher para validación dinámica
         val watcher = {
             val name = binding.tiNombreMascota.editText?.text.toString().trim()
@@ -88,20 +98,35 @@ class EditAppointmentFragment : Fragment() {
             binding.tiTelefono.editText
         ).forEach { it?.addTextChangedListener { watcher() }}
 
-        // Acción del botón "Editar"
-        binding.btnEditarCita.setOnClickListener {
-            val update = DogAppointment(
-                id = receivedAppointment.id,
-                dogName = binding.tiNombreMascota.editText?.text.toString(),
-                dogBreed = binding.tiRaza.editText?.text.toString(),
-                ownerName = binding.tiNombrePropietario.editText?.text.toString(),
-                phone = binding.tiTelefono.editText?.text.toString(),
-                dogSymptom = receivedAppointment.dogSymptom,
-                dogImage = receivedAppointment.dogImage
-            )
+    }
 
-            dogAppointmentViewModel.updateAppointment(update)
-            Toast.makeText(requireContext(), "Ir a HU2", Toast.LENGTH_SHORT).show() //TODO
+    private fun setupEditButton() {
+        binding.btnEditarCita.setOnClickListener {
+            val name = binding.tiNombreMascota.editText?.text.toString().trim()
+            val breedInput = binding.tiRaza.editText?.text.toString().trim()
+            val owner = binding.tiNombrePropietario.editText?.text.toString().trim()
+            val phone = binding.tiTelefono.editText?.text.toString().trim()
+
+            val breed = breedInput.lowercase().replace(" ", "/")
+
+            lifecycleScope.launch {
+                try {
+                    val imageResponse = com.example.equipocatorce.webservice.ApiUtils.getApiService().getImage(breed)
+                    val updatedAppointment = DogAppointment(
+                        id = receivedAppointment.id,
+                        dogName = name,
+                        dogBreed = breedInput,
+                        ownerName = owner,
+                        phone = phone,
+                        dogSymptom = receivedAppointment.dogSymptom,
+                        dogImage = imageResponse.message
+                    )
+                    dogAppointmentViewModel.updateAppointment(updatedAppointment)
+                    findNavController().navigate(R.id.action_editAppointmentFragment_to_homeFragment)
+                } catch (e: Exception) {
+                    Toast.makeText(requireContext(), "Error al obtener la imagen de la raza", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 }
