@@ -43,7 +43,7 @@ class EditAppointmentFragment : Fragment() {
         binding.tiTelefono.editText?.setText(receivedAppointment.phone)
         binding.tiRaza.editText?.setText(receivedAppointment.dogBreed)
 
-        dogAppointmentViewModel.getImage()
+        dogAppointmentViewModel.getImage(receivedAppointment.dogBreed)
         dogAppointmentViewModel.getBreeds()
     }
 

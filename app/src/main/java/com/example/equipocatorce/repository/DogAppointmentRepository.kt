@@ -58,10 +58,10 @@ class DogAppointmentRepository(val context: Context) {
         }
     }
 
-    suspend fun getImage(): DogImageResponse {
+    suspend fun getImage(breed: String): DogImageResponse {
         return withContext(Dispatchers.IO) {
             try {
-                val response = apiService.getImage()
+                val response = apiService.getImage(breed)
                 response
             } catch (e: Exception) {
                 e.printStackTrace()
