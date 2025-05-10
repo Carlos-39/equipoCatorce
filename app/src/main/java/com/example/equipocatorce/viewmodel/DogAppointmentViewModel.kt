@@ -92,12 +92,12 @@ class DogAppointmentViewModel(application: Application): AndroidViewModel(applic
         }
     }
 
-    fun getImage() {
+    fun getImage(breed: String) {
         viewModelScope.launch {
             _progresState.value = true
 
             try {
-                _dogImage.value = dogAppointmentRepository.getImage()
+                _dogImage.value = dogAppointmentRepository.getImage(breed)
                 _progresState.value = false
             } catch (e:Exception) {
                 _progresState.value = false
