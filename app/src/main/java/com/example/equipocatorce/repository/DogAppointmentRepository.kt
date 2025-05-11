@@ -23,6 +23,13 @@ class DogAppointmentRepository(val context: Context) {
         }
     }
 
+    // Obtener una cita por ID
+    suspend fun getAppointmentById(id: Int): DogAppointment? {
+        return withContext(Dispatchers.IO) {
+            dogAppointmentsDao.getAppointmentById(id)
+        }
+    }
+
     // Guardar cita
     suspend fun saveAppointment(dogAppointment: DogAppointment) {
         withContext(Dispatchers.IO){

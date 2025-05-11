@@ -27,6 +27,9 @@ class DogAppointmentViewModel(application: Application): AndroidViewModel(applic
     private val _dogImage = MutableLiveData<DogImageResponse>()
     val dogImage: LiveData<DogImageResponse> get() = _dogImage
 
+    private val _selectedAppointment = MutableLiveData<DogAppointment?>()
+    val selectedAppointment: LiveData<DogAppointment?> get() = _selectedAppointment
+
     fun saveAppointment(dogAppointment: DogAppointment) {
         viewModelScope.launch {
             _progresState.value = true
@@ -101,6 +104,19 @@ class DogAppointmentViewModel(application: Application): AndroidViewModel(applic
                 _progresState.value = false
             } catch (e:Exception) {
                 _progresState.value = false
+            }
+        }
+    }
+
+    fun getAppointmentById(id: Int) {
+        viewModelScope.launch {
+            _progresState.value = true
+            try {
+                _selectedAppointment.value = dogAppointmentRepository.getAppointmentById(id)
+                _progresState.value = false
+            } catch (e: Exception) {
+                _progresState.value = false
+                _selectedAppointment.value = null
             }
         }
     }

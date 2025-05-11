@@ -21,6 +21,10 @@
         android:name="com.example.equipocatorce.view.fragment.DetailsAppointmentFragment"
         android:label="fragment_details"
         tools:layout="@layout/fragment_details_appointment" >
+
+        <argument
+            android:name="appointmentId"
+            app:argType="integer" />
     </fragment>
 
     <fragment
@@ -32,6 +36,9 @@
         <action
             android:id="@+id/action_homeFragment_to_nuevaCitaFragment"
             app:destination="@id/nuevaCitaFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_detailAppointment"
+            app:destination="@id/detailAppointment" />
     </fragment>
 
     <fragment

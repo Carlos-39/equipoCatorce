@@ -21,4 +21,7 @@ interface DogAppointmentDao {
 
     @Update
     suspend fun updateAppointment(dogAppointment: DogAppointment)
+
+    @Query("SELECT * FROM DogAppointment WHERE id = :id")
+    suspend fun getAppointmentById(id: Int): DogAppointment?
 }

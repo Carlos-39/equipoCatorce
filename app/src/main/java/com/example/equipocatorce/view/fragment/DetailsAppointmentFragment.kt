@@ -1,16 +1,23 @@
 package com.example.equipocatorce.view.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.example.equipocatorce.databinding.FragmentDetailsAppointmentBinding
-
+import com.example.equipocatorce.viewmodel.DogAppointmentViewModel
 
 class DetailsAppointmentFragment : Fragment() {
     private lateinit var binding: FragmentDetailsAppointmentBinding
+    private val args: DetailsAppointmentFragmentArgs by navArgs()
+    private val viewModel: DogAppointmentViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,13 +31,34 @@ class DetailsAppointmentFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        controllers()
+        getAppointmentDetails()
+        setupListeners()
     }
 
-    private fun controllers(){
+    @SuppressLint("SetTextI18n")
+    private fun getAppointmentDetails(){
+        val appointmentId = args.appointmentId
 
+        viewModel.getAppointmentById(appointmentId)
+        viewModel.selectedAppointment.observe(viewLifecycleOwner) { appointment ->
+            if (appointment != null) {
+                binding.tvId.text = "#" + appointment.id.toString()
+                binding.tvDogName.text = appointment.dogName
+                binding.tvDogBreed.text = appointment.dogBreed
+                binding.tvDogSymptom.text = appointment.dogSymptom
+                binding.tvOwnerName.text = "Propietario: " + appointment.ownerName
+                binding.tvPhone.text = "Telefono: " + appointment.phone
+                Glide.with(requireContext()).load(appointment.dogImage).into(binding.imageTopCard)
+            } else {
+                Toast.makeText(requireContext(), "Cita no encontrada", Toast.LENGTH_SHORT).show()
+                findNavController().navigateUp()
+            }
+        }
+    }
+
+    private fun setupListeners() {
         binding.ivBack.setOnClickListener{
-            Toast.makeText(requireContext(), "Regresar a lista de Citas", Toast.LENGTH_SHORT).show()
+            findNavController().navigateUp()
         }
 
         binding.fabEdit.setOnClickListener{
