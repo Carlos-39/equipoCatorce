@@ -1,28 +1,28 @@
 package com.example.equipocatorce.view.viewholder
 
-import android.os.Bundle
-import androidx.navigation.NavController
+import android.annotation.SuppressLint
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.equipocatorce.R
 import com.example.equipocatorce.databinding.DogAppointmentItemBinding
 import com.example.equipocatorce.model.DogAppointment
+import com.example.equipocatorce.view.fragment.HomeFragmentDirections
 
-class DogAppointmentViewHolder(binding: DogAppointmentItemBinding, navController: NavController) :
-    RecyclerView.ViewHolder(binding.root){
-    val bindingItem = binding
-    val navController = navController
+class DogAppointmentViewHolder(
+    private val binding: DogAppointmentItemBinding,
+    private val navController: androidx.navigation.NavController
+) : RecyclerView.ViewHolder(binding.root) {
 
+    @SuppressLint("SetTextI18n")
     fun setAppointmentItem(dogAppointment: DogAppointment) {
-        bindingItem.dogName.text = dogAppointment.dogName
-        bindingItem.dogSymptom.text = dogAppointment.dogSymptom
-        bindingItem.id.text = "# ${dogAppointment.id}"
-        Glide.with(bindingItem.root.context).load(dogAppointment.dogImage).into(bindingItem.dogImage)
+        binding.dogName.text = dogAppointment.dogName
+        binding.dogSymptom.text = dogAppointment.dogSymptom
+        binding.id.text = "#" + dogAppointment.id
+        Glide.with(binding.root.context).load(dogAppointment.dogImage).into(binding.dogImage)
 
-        bindingItem.dateItem.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putSerializable("dogAppointment", dogAppointment)
-            navController.navigate(R.id.action_homeFragment_to_nuevaCitaFragment, bundle)
+        //SafeArgs para pasar ID
+        binding.root.setOnClickListener {
+            val action = HomeFragmentDirections.actionHomeFragmentToDetailAppointment(dogAppointment.id)
+            navController.navigate(action)
         }
     }
 }
