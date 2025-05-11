@@ -25,6 +25,10 @@
         <argument
             android:name="appointmentId"
             app:argType="integer" />
+
+        <action
+            android:id="@+id/action_detailAppointment_to_editAppointmentFragment"
+            app:destination="@id/editAppointmentFragment" />
     </fragment>
 
     <fragment
@@ -50,6 +54,10 @@
         <action
             android:id="@+id/action_editAppointmentFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+
+        <argument
+            android:name="dataAppointment"
+            app:argType="com.example.equipocatorce.model.DogAppointment" />
     </fragment>
 
     <fragment
