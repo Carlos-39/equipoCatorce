@@ -64,6 +64,14 @@ dependencies {
     //RecyclerView
     implementation("androidx.recyclerview:recyclerview:1.3.1")
 
+    //implementation(libs.androidx.constraintlayout)
+    //Lottie para imagenes animadas
+    implementation("com.airbnb.android:lottie:6.6.6")
+    // Biometría (huella digital, facial, etc.)
+    implementation("androidx.biometric:biometric:1.1.0")
+    //implementation(libs.androidx.lifecycle.viewmodel.android)
+
+
     //corrutinas
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
