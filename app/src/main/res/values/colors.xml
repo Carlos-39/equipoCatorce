@@ -3,4 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="backgroundLogin">#FF1E252D</color>
+    <color name="dark_gray">#1E282D</color>
+    <color name="pink">#F05861</color>
+    <color name="purple">#800080</color>
 </resources>

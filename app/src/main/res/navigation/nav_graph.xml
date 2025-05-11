@@ -13,16 +13,47 @@
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"
             app:destination="@+id/homeFragment"
-        />
+            />
     </fragment>
 
+    <fragment
+        android:id="@+id/detailAppointment"
+        android:name="com.example.equipocatorce.view.fragment.DetailsAppointmentFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details_appointment" >
+    </fragment>
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.equipocatorce.view.fragment.HomePrueba"
-        android:label="home"
-        tools:layout="@layout/fragment_home_prueba"
+        android:name="com.example.equipocatorce.view.fragment.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home"
+        >
+        <action
+            android:id="@+id/action_homeFragment_to_nuevaCitaFragment"
+            app:destination="@id/nuevaCitaFragment" />
+    </fragment>
 
-        />
+    <fragment
+        android:id="@+id/editAppointmentFragment"
+        android:name="com.example.equipocatorce.view.fragment.EditAppointmentFragment"
+        android:label="EditAppointmentFragment"
+        tools:layout="@layout/fragment_edit_appointment">
+
+        <action
+            android:id="@+id/action_editAppointmentFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nuevaCitaFragment"
+        android:name="com.example.equipocatorce.view.fragment.NuevaCitaFragment"
+        android:label="NuevaCitaFragment"
+        tools:layout="@layout/fragment_nueva_cita">
+        <action
+            android:id="@+id/action_nuevaCitaFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
 
 </navigation>
