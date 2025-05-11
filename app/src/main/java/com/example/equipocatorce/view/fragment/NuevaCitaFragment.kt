@@ -93,6 +93,7 @@ class NuevaCitaFragment : Fragment(R.layout.fragment_nueva_cita) {
 
                         val db = DogAppointmentsDB.getDatabase(requireContext())
                         db.dogAppointmentsDao().saveAppointment(cita)
+                        Toast.makeText(requireContext(), "Cita creada", Toast.LENGTH_SHORT).show()
                         findNavController().navigate(R.id.action_nuevaCitaFragment_to_homeFragment)
                     } catch (e: Exception) {
                         Toast.makeText(requireContext(), "Error al obtener la imagen de la raza", Toast.LENGTH_SHORT).show()

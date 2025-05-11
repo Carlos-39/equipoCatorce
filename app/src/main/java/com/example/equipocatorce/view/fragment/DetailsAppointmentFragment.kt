@@ -12,12 +12,16 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.equipocatorce.databinding.FragmentDetailsAppointmentBinding
+import com.example.equipocatorce.view.fragment.DetailsAppointmentFragmentDirections
+import com.example.equipocatorce.model.DogAppointment
 import com.example.equipocatorce.viewmodel.DogAppointmentViewModel
+
 
 class DetailsAppointmentFragment : Fragment() {
     private lateinit var binding: FragmentDetailsAppointmentBinding
     private val args: DetailsAppointmentFragmentArgs by navArgs()
     private val viewModel: DogAppointmentViewModel by viewModels()
+    private var currentAppointment: DogAppointment? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,6 +46,7 @@ class DetailsAppointmentFragment : Fragment() {
         viewModel.getAppointmentById(appointmentId)
         viewModel.selectedAppointment.observe(viewLifecycleOwner) { appointment ->
             if (appointment != null) {
+                currentAppointment = appointment
                 binding.tvId.text = "#" + appointment.id.toString()
                 binding.tvDogName.text = appointment.dogName
                 binding.tvDogBreed.text = appointment.dogBreed
@@ -62,12 +67,38 @@ class DetailsAppointmentFragment : Fragment() {
         }
 
         binding.fabEdit.setOnClickListener{
-            Toast.makeText(requireContext(), "Editar Cita", Toast.LENGTH_SHORT).show()
+            editAppointment()
         }
 
         binding.fabDelete.setOnClickListener{
-            Toast.makeText(requireContext(), "Eliminar esta cita", Toast.LENGTH_SHORT).show()
+            showDeleteConfirmationDialog()
         }
     }
 
+    private fun showDeleteConfirmationDialog() {
+        val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
+        builder.setTitle("Confirmar eliminación")
+        builder.setMessage("¿Estás seguro de que deseas eliminar esta cita?")
+        builder.setPositiveButton("Eliminar") { _, _ ->
+            deleteAppointment()
+        }
+        builder.setNegativeButton("Cancelar", null)
+        builder.show()
+    }
+
+    private fun editAppointment() {
+        currentAppointment?.let {
+            val action = DetailsAppointmentFragmentDirections
+                .actionDetailAppointmentToEditAppointmentFragment(it)
+            findNavController().navigate(action)
+        }
+    }
+
+    private fun deleteAppointment() {
+        currentAppointment?.let {
+            viewModel.deleteAppointment(it)
+            Toast.makeText(requireContext(), "Cita eliminada", Toast.LENGTH_SHORT).show()
+            findNavController().navigateUp()
+        }
+    }
 }

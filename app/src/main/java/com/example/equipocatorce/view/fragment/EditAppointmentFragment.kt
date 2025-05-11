@@ -122,6 +122,7 @@ class EditAppointmentFragment : Fragment() {
                         dogImage = imageResponse.message
                     )
                     dogAppointmentViewModel.updateAppointment(updatedAppointment)
+                    Toast.makeText(requireContext(), "Cita actualizada", Toast.LENGTH_SHORT).show()
                     findNavController().navigate(R.id.action_editAppointmentFragment_to_homeFragment)
                 } catch (e: Exception) {
                     Toast.makeText(requireContext(), "Error al obtener la imagen de la raza", Toast.LENGTH_SHORT).show()
