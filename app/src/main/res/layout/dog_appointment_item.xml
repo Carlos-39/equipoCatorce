@@ -6,6 +6,7 @@
 
     </data>
 
+    <!-- Contenedor principal: RelativeLayout permite posicionar vistas una respecto a otra -->
     <RelativeLayout
         android:id="@+id/dateItem"
         android:layout_width="match_parent"
