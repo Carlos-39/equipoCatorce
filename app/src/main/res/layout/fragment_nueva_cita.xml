@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <!-- Toolbar personalizada para el encabezado de la pantalla -->
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarNuevaCita"
             android:layout_width="350dp"
@@ -21,6 +22,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <!-- Botón de regreso (ícono de flecha) dentro del toolbar -->
             <ImageView
                 android:id="@+id/addButton"
                 android:layout_width="40dp"
@@ -32,6 +34,7 @@
                 android:focusable="true"
                 android:src="@drawable/ic_back_arrow" />
 
+            <!-- Título centrado del toolbar -->
             <TextView
                 android:id="@+id/tvName"
                 android:layout_width="wrap_content"
@@ -44,6 +47,7 @@
 
         </androidx.appcompat.widget.Toolbar>
 
+        <!-- Campo de texto para el nombre de la mascota -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputLayoutNombreMascota"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -67,7 +71,8 @@
                 android:maxLength="15" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Raza -->
+
+        <!-- Campo de texto para la raza con autocompletado -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputLayoutRaza"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -85,6 +90,7 @@
             app:layout_constraintEnd_toEndOf="parent">
 
 
+            <!-- Autocompletado de razas -->
             <AutoCompleteTextView
                 android:id="@+id/inputRaza"
                 android:layout_width="match_parent"
@@ -94,7 +100,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
-        <!-- Nombre del propietario -->
+        <!-- Campo para el nombre del propietario -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputLayoutNombrePropietario"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -118,7 +124,8 @@
                 android:maxLength="30" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Teléfono -->
+
+        <!-- Campo para el teléfono del propietario -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputLayoutTelefono"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -142,7 +149,8 @@
                 android:maxLength="10" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Spinner síntomas -->
+
+        <!-- Selector desplegable para elegir los síntomas -->
         <Spinner
             android:id="@+id/spinnerSintomas"
             android:layout_width="0dp"
@@ -155,7 +163,8 @@
             android:layout_marginEnd="16dp"
             />
 
-        <!-- Botón guardar -->
+
+        <!-- Botón para guardar la cita -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnGuardarCita"
             android:layout_width="wrap_content"
