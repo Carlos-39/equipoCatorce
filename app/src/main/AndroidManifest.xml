@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
 
+<!-- Icono principal de la app, Nombre de la app, icono redondeado para algunas versiones de Android... -->
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -16,6 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EquipoCatorce"
         tools:targetApi="31">
+
+        <!-- Actividad principal (pantalla inicial) de la app -->
         <activity
             android:name=".view.MainActivity"
             android:exported="true">

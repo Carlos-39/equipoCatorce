@@ -6,12 +6,14 @@
 
     </data>
 
+    <!-- Contenedor principal: pantalla completa -->
     <RelativeLayout
         android:theme="@style/Theme.Material3.Dark"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFFFFF">
+        android:background="#FFFFFF">  <!-- Fondo blanco general -->
 
+        <!-- Encabezado de la pantalla gris oscuro, titulo del encabezado, logo del perro, texto: dogApp-->
         <RelativeLayout
             android:id="@+id/header"
             android:layout_width="match_parent"
@@ -50,6 +52,7 @@
 
         </RelativeLayout>
 
+        <!-- Lista de elementos (citas), debajo del encabezado -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview"
             android:layout_width="match_parent"
@@ -58,6 +61,7 @@
             tools:listitem="@layout/dog_appointment_item"
             android:padding="10dp"/>
 
+        <!-- Botón flotante para agregar nuevas citas -->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/addButton"
             android:layout_width="wrap_content"
