@@ -47,8 +47,8 @@ class NuevaCitaFragment : Fragment() {
 
     // Configura el botón de regreso en la barra superior
     private fun setupToolbar() {
-        binding.toolbarNuevaCita.setNavigationOnClickListener {
-            findNavController().navigateUp()
+        binding.addButton.setOnClickListener {
+            findNavController().navigate(R.id.action_nuevaCitaFragment_to_homeFragment)
         }
     }
 
