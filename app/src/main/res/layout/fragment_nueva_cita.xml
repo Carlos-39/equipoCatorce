@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- Toolbar personalizada para el encabezado de la pantalla -->
+        <!-- Toolbar personalizada  -->
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarNuevaCita"
             android:layout_width="350dp"
@@ -22,7 +22,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <!-- Botón de regreso (ícono de flecha) dentro del toolbar -->
+            <!-- Botón de regreso -->
             <ImageView
                 android:id="@+id/addButton"
                 android:layout_width="40dp"
@@ -30,7 +30,7 @@
                 android:layout_gravity="start"
                 android:layout_marginStart="50sp"
                 android:clickable="true"
-                android:contentDescription="TODO"
+                android:contentDescription="Regresar"
                 android:focusable="true"
                 android:src="@drawable/ic_back_arrow" />
 
