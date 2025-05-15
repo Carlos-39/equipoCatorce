@@ -17,6 +17,7 @@ import com.example.equipocatorce.model.DogAppointment
 import com.example.equipocatorce.viewmodel.DogAppointmentViewModel
 import kotlinx.coroutines.launch
 
+// Fragmento encargado de mostrar y editar los datos de una cita previamente registrada.
 class EditAppointmentFragment : Fragment() {
     private lateinit var binding: FragmentEditAppointmentBinding
     private val dogAppointmentViewModel: DogAppointmentViewModel by viewModels()
@@ -40,6 +41,7 @@ class EditAppointmentFragment : Fragment() {
         setupToolbar()
     }
 
+    // Obtiene los datos de la cita enviada como argumento
     private fun getData() {
         val args = arguments
         receivedAppointment = args?.getSerializable("dataAppointment") as DogAppointment
@@ -54,6 +56,7 @@ class EditAppointmentFragment : Fragment() {
         dogAppointmentViewModel.getBreeds()
     }
 
+    // Observa la lista de razas de perros obtenida desde la API y la carga en el AutoCompleteTextView.
     private fun observers() {
         dogAppointmentViewModel.getBreeds()
         dogAppointmentViewModel.dogBreedList.observe(viewLifecycleOwner) { breeds ->
@@ -74,12 +77,14 @@ class EditAppointmentFragment : Fragment() {
         }
     }
 
+    // Configura el botón de retroceso en la barra superior.
     private fun setupToolbar() {
         binding.includeToolbar.ivBack.setOnClickListener() {
             findNavController().navigateUp()
         }
     }
 
+    // Controla los campos de texto para habilitar el botón solo si todos están completos.
     private fun controladores() {
         // TextWatcher para validación dinámica
         val watcher = {
@@ -100,6 +105,7 @@ class EditAppointmentFragment : Fragment() {
 
     }
 
+    // Lógica del botón "Editar cita". Valida los campos, actualiza la imagen según la raza
     private fun setupEditButton() {
         binding.btnEditarCita.setOnClickListener {
             val name = binding.tiNombreMascota.editText?.text.toString().trim()
@@ -111,6 +117,7 @@ class EditAppointmentFragment : Fragment() {
 
             lifecycleScope.launch {
                 try {
+                    // Solicita nueva imagen desde API usando la nueva raza
                     val imageResponse = com.example.equipocatorce.webservice.ApiUtils.getApiService().getImage(breed)
                     val updatedAppointment = DogAppointment(
                         id = receivedAppointment.id,

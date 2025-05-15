@@ -8,6 +8,7 @@ import androidx.room.Query
 import androidx.room.Update
 import com.example.equipocatorce.model.DogAppointment
 
+//Interfaz DAO (Data Access Object) que define las operaciones de acceso a la base de datos para la entidad DogAppointment.
 @Dao
 interface DogAppointmentDao {
     @Query("SELECT * FROM DogAppointment")

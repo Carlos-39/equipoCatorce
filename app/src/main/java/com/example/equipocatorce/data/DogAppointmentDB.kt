@@ -11,6 +11,7 @@ import com.example.equipocatorce.utils.Constants.NAME_DB
 abstract class DogAppointmentsDB: RoomDatabase() {
     abstract fun dogAppointmentsDao(): DogAppointmentDao
 
+    // Metodo para obtener una instancia de la base de datos.
     companion object{
         fun getDatabase(context: Context): DogAppointmentsDB {
             return  Room.databaseBuilder(
