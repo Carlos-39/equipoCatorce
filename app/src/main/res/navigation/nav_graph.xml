@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.equipocatorce.view.fragment.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@+id/homeFragment"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailAppointment"
+        android:name="com.example.equipocatorce.view.fragment.DetailsAppointmentFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details_appointment" >
+
+        <argument
+            android:name="appointmentId"
+            app:argType="integer" />
+
+        <action
+            android:id="@+id/action_detailAppointment_to_editAppointmentFragment"
+            app:destination="@id/editAppointmentFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.equipocatorce.view.fragment.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home"
+        >
+        <action
+            android:id="@+id/action_homeFragment_to_nuevaCitaFragment"
+            app:destination="@id/nuevaCitaFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_detailAppointment"
+            app:destination="@id/detailAppointment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editAppointmentFragment"
+        android:name="com.example.equipocatorce.view.fragment.EditAppointmentFragment"
+        android:label="EditAppointmentFragment"
+        tools:layout="@layout/fragment_edit_appointment">
+
+        <action
+            android:id="@+id/action_editAppointmentFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+
+        <argument
+            android:name="dataAppointment"
+            app:argType="com.example.equipocatorce.model.DogAppointment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nuevaCitaFragment"
+        android:name="com.example.equipocatorce.view.fragment.NuevaCitaFragment"
+        android:label="NuevaCitaFragment"
+        tools:layout="@layout/fragment_nueva_cita">
+        <action
+            android:id="@+id/action_nuevaCitaFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
+
+</navigation>

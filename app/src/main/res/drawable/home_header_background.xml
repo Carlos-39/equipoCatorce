@@ -1,0 +1,8 @@
+<!-- Conjunto de Instrucciones para dibujar el header de fondo gris oscuro-->
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#333333" />
+    <corners android:topRightRadius="0dp"
+        android:bottomRightRadius="0dp"
+        android:bottomLeftRadius="65dp" />
+</shape>
